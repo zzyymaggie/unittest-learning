@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.dao.UserDao">
+    <select id="getUserByNick" parameterType="String" resultType="com.example.project.entity.User">
+        select * from user where user.nick = #{nick}
+    </select>
+
+    <select id="getMatchCount" resultType="int">
+        select count(*) from user where user.nick = #{nick} and user.password=#{password}
+    </select>
+
+    <delete id="remove" parameterType="String">
+      delete from user where user.nick = #{nick}
+    </delete>
+
+    <update id="update" parameterType="com.example.project.entity.User">
+        update user set user.password = #{password} where user.nick = #{nick}
+    </update>
+
+    <insert id="save" parameterType="com.example.project.entity.User">
+        insert into user(nick,password) values(#{nick}, #{password})
+    </insert>
+</mapper>
